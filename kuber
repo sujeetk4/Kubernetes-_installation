@@ -12,6 +12,12 @@ curl -fsSL "https://packages.cloud.google.com/apt/doc/apt-key.gpg" | sudo gpg --
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt update -y
+---------------------getting error ? then use 
+gpg --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
+gpg --export --armor B53DC80D13EDEF05 | sudo apt-key add -
+gpg --export --armor B53DC80D13EDEF05 | sudo gpg --dearmor -o /usr/share/keyrings/kubernetes-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://packages.cloud.google.com/apt kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
+------------------------------------------------
 sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
 
 --------------------------------------------- Master Node -------------------------------------------------- 
